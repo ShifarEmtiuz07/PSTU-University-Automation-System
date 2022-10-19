@@ -1,0 +1,378 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PSTU_Automation1</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    
+    <!--new counter-->
+
+     <link href="~/css/counterCSS.css" rel="stylesheet"/>
+     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+
+
+     <link
+      href="~/vendor/bootstrap-icons/bootstrap-icons.css"      
+      rel="stylesheet"
+    />
+     <link href="~/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+       <!-- Template Main JS File -->
+    <script src="~/js/main.js"></script>
+
+      <!-- Vendor CSS Files -->
+    <link href="~/vendor/animate.css/animate.min.css" rel="stylesheet" />
+    <link
+      href="~/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="~/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="~/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="~/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="~/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+      <!-- Vendor JS Files -->
+   <!--  <script src="vendor/"></script> --> 
+  
+   <!--
+        <script src="../wwwroot/vendor/purecounter/purecounter.js"></script> 
+
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="~/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="~/vendor/php-email-form/validate.js"></script>
+   -->
+  
+    
+</head>
+<body>
+      
+       <header>
+         
+
+
+        
+            <nav id="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" class="navbar">
+          <div class="container-fluid d-flex align-items-center " id="head">
+            <!-- <a href="index.html" class="logo">--> 
+                <div>
+                    <img src="~/images/logo.jpg" alt="" class="img-fluid" width="80" height="100"> 
+                  
+               <h6 style="margin-left:20px">PSTU</h6>
+                </div>
+                  
+               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+      
+         <!--<nav id="navbar" class="navbar">-->  
+                
+          <ul>
+            <li><a class="nav-link scrollto active" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>About PSTU</span> <i class="bi bi-chevron-down"></i
+              ></a>
+              <ul>
+                <li><a class="nav-link scrollto active" asp-area="" asp-controller="Home" asp-action="MessageVC">Message From VC </a></li>
+                
+                <li><a class="nav-link scrollto active" asp-area="" asp-controller="Home" asp-action="history">History Of PSTU</a></li>
+                <li><a href="#">Administration</a></li>
+                <li><a href="#">Mission & Objectives</a></li>
+              </ul>
+            </li>
+             <li class="dropdown">
+              <a href="#"
+                ><span>ACADEMIC</span> <i class="bi bi-chevron-down"></i
+              ></a>
+              <ul>
+                <li><a class="nav-link scrollto active" asp-area="" asp-controller="Home" asp-action="Faculties">Faculties</a></li>
+                
+                 
+                 
+                
+                <li><a class="nav-link scrollto active" asp-area="" asp-controller="Libraries" asp-action="Create">Library </a></li>
+                <li><a href="#">Scholarship</a></li>
+                <li><a href="#">Institute</a></li>
+              </ul>
+            </li>
+           
+                 <li><a class="nav-link scrollto" asp-area="" asp-controller="Home" asp-action="Notice">Notice</a></li>
+               
+
+
+
+                <li class="dropdown">
+              <a href="#"
+                ><span>Addmission</span> <i class="bi bi-chevron-down"></i
+              ></a>
+              <ul>
+                   
+                   <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="U_Ad_View">Undergraduation Addmission</a>
+                   <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Post_AD_View">Postgraduation Addmission</a>
+                
+              </ul>
+            </li>
+
+         
+           @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+           {
+             <li><a class="nav-link scrollto" asp-area="" asp-controller="Home" asp-action="admin">Admin</a></li>
+           
+        }
+
+           @if (SignInManager.IsSignedIn(User))
+
+           {
+              <li class="nav-item">
+                  <a class="nav-link scrollto" asp-area="" asp-controller="Teachers" asp-action="Create">Teacher</a>
+                  
+             </li>
+           }
+          
+
+          @if (SignInManager.IsSignedIn(User) && User.IsInRole("Student"))
+{
+           
+            
+                <li class="nav-item">
+                   
+                   <a class="nav-link scrollto" asp-area="" asp-controller="Students" asp-action="Create">Student</a>
+             </li>
+
+              <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="StudentProfile">Student Profile</a>
+                        </li>
+             
+              <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Enroll_Course" asp-action="Create">Enroll_Course</a>
+               </li>
+
+         }
+
+          @if (SignInManager.IsSignedIn(User) && User.IsInRole("Teacher") || User.IsInRole("Admin"))
+          {
+              
+              <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="TeacherProfile">Teacher Profile</a>
+                        </li>
+
+                        
+              <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="TotalStudent">Total Student</a>
+                        </li>
+
+          }
+
+             
+
+
+               
+                        
+
+
+           
+            <li>
+           
+          <partial name="_LoginPartial" class="getstarted scrollto"/> 
+            </li>
+            
+          </ul>
+         
+          
+     
+        </div>
+
+        </nav>
+
+
+ 
+    </header>
+
+
+ 
+    
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+      
+     <!-- <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - PSTU_Automation1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>-->   
+
+
+
+     <!--fotter start-->
+    
+        <footer id="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-6">
+              <div class="footer-info">
+                <h6>Patuakhali Science & Technology University </h6>
+                <br/><br/>
+                <p>
+                <h9>Location :</h9> Dumki-8602, Dumki, Patuakhali <br />
+                  <h9>Google Map Latitude :</h9>22.4641788<br />
+                   <h7>Google Map Langitude :</h7>90.3825297<br /><br />
+                  <strong>Phone:</strong> +1 5589 55488 55<br />
+                  <strong>Email:</strong> admin@pstu.ac.bd<br />
+                </p>
+                <div class="social-links mt-3">
+                  <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                  <a href="#" class="facebook"
+                    ><i class="bx bxl-facebook"></i
+                  ></a>
+                  <a href="#" class="instagram"
+                    ><i class="bx bxl-instagram"></i
+                  ></a>
+                  <a href="#" class="google-plus"
+                    ><i class="bx bxl-skype"></i
+                  ></a>
+                  <a href="#" class="linkedin"
+                    ><i class="bx bxl-linkedin"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-2 col-md-6 footer-links">
+              <h4>Useful Links</h4>
+              <ul>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a class="nav-link scrollto active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li>
+                 <i class="bx bx-chevron-right"></i><a class="nav-link scrollto active" asp-area="" asp-controller="Home" asp-action="MessageVC">About Us</a>           <!-- <a href="#">About us</a>-->
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a class="nav-link scrollto active" asp-area="" asp-controller="Home" asp-action="Faculties">Faculties</a>
+                </li>
+                 
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a class="nav-link scrollto" asp-area="" asp-controller="Home" asp-action="Notice">Notice</a>
+                
+                </li>
+              
+              </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6 footer-newsletter">
+              <h4>Our Newsletter</h4>
+              <p>
+                Send an email
+              </p>
+              <form action="" method="post">
+                <input type="email" name="email" /><input
+                  type="submit"
+                  value="Email"
+                />
+              </form>
+            </div>
+
+            <div class="col-lg-4 col-md-6 footer-links">
+
+
+                <div class="mapouter"><div class="gmap_canvas"><iframe class="gmap_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=390&amp;height=273&amp;hl=en&amp;q=Patuakhali Science And Technology University&amp;t=&amp;z=8&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://www.kokagames.com/fnf-friday-night-funkin-mods/">Friday Night Funkin Mods</a></div><style>.mapouter{position:relative;text-align:right;width:390px;height:273px;}.gmap_canvas {overflow:hidden;background:none!important;width:390px;height:273px;}.gmap_iframe {width:390px!important;height:273px!important;}</style></div>
+           
+            </div>
+
+          <!--<div class="col-lg-4 col-md-6 footer-newsletter">
+              <h4>Our Newsletter</h4>
+              <p>
+                Tamen quem nulla quae legam multos aute sint culpa legam noster
+                magna
+              </p>
+              <form action="" method="post">
+                <input type="email" name="email" /><input
+                  type="submit"
+                  value="Subscribe"
+                />
+              </form>
+            </div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="copyright">
+            Designed by <strong>A. B. M. Shifar Emtiuz</strong><br/>
+          &copy; Copyright <strong><span>2022</span></strong
+          >. All Rights Reserved
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/groovin-free-bootstrap-theme/ -->
+         
+        </div>
+      </div>
+    </footer>
+
+      
+
+       <!--fotter end-->
+  
+      <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+
+
+
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+
+     <script src="~/vendor/purecounter/purecounter.js"></script> 
+
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="~/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="~/vendor/php-email-form/validate.js"></script>
+
+
+     <script src="~/js/Counter.js"></script> 
+
+     <script src="~/js/jquery.counterup.min.js"></script>
+     <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+     <script>
+     jQuery(document).ready(function ( $ )
+     {
+       $('.counter').counterUp({
+    delay: 10,
+    time: 1000
+    });
+
+
+     });
+     
+     </script>
+
+  
+</body>
+</html>

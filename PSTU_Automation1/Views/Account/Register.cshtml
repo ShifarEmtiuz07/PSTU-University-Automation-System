@@ -1,0 +1,138 @@
+﻿@using PSTU_Automation1.Models.Enums
+@model PSTU_Automation1.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+    ViewBag.PageHeaderTitle = $"User Registration";
+    ViewBag.PageHeaderSection = "Account";
+
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4">
+            <h3 class="text-center">Create your University Profile</h3>
+            <hr />
+            <form asp-action="Register">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <input asp-for="AccountType" hidden="" />
+                @{
+                    var userNameLevel = Model.AccountType == AccountType.UndergraduateStudent || Model.AccountType == AccountType.PostgraduateStudent ? $"Student Academic ID" : "User name";
+                }
+              
+
+               
+
+                 <div class="form-group">
+                    <label asp-for="UserName" class="control-label">@userNameLevel</label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+
+
+                
+
+                <div class="form-group">
+                    <label asp-for="CovidVaccine" class="control-label">Is Covid Vaccinated? </label>
+                    <input asp-for="CovidVaccine" class="form-control" />
+                    <span asp-validation-for="CovidVaccine" class="text-danger"></span>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" type="email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                @*<div class="form-group">
+                        <label asp-for="ConfirmEmail" class="control-label"></label>
+                        <input asp-for="ConfirmEmail" class="form-control" onpaste="return false;" />
+                        <span asp-validation-for="ConfirmEmail" class="text-danger"></span>
+                    </div>*@
+
+                    
+
+
+
+                    
+
+                   
+
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+
+                    <div class="input-group">
+                        <input asp-for="Password" class="form-control" type="password" />
+                        <div class="input-group-append">
+                            <span id="PasswordHider" class="input-group-text" onclick="showPass('Password')">
+                                <i class="fa fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword" class="control-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" onpaste="return false;" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+               
+
+
+                @*<div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>*@
+                <div class="form-group">
+                    <input id="submitData" type="submit" value="Create Account" class="btn btn-lg btn-primary w-100" />
+                    <p>Already have an account? <a asp-controller="Account" asp-action="Login">Please Login here</a>.</p>
+                    <p><a asp-action="Register" asp-controller="Account" asp-route-AccountType="Teacher">Register as a Teacher</a>.</p>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    @*<script src="https://www.google.com/recaptcha/api.js" async defer></script>*@
+
+    @*<script>
+            var validateData = document.getElementById('validateData');
+            validateData.onclick = function() {
+                document.getElementById('submitData').click();
+            }
+            function verifyToken() {
+
+                $.getJSON('/VerifyToken/Recaptcha/',
+                    { "Token": grecaptcha.getResponse() },
+                    function (result) {
+                        if (JSON.parse(result) === true) {
+                            validateData.disabled = false;
+                        }
+                    }
+                );
+
+            };
+            function resetToken() {
+
+                validateData.disabled = true;
+            };
+
+
+
+        </script>*@
+}
+

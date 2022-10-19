@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Reports>
+	<Folder Name="General" Description="Food Warehouse Reports">
+		<Report File="Undergraduation_Apply.frx"/>
+	</Folder>
+</Reports>

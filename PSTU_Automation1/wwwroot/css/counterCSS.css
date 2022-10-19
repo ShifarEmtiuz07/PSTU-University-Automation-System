@@ -1,0 +1,88 @@
+.counter {
+    background: #fff;
+    font-family: 'Noto Sans JP', sans-serif;
+    text-align: center;
+    width: 210px;
+    padding: 0 0 25px;
+    margin: 0 auto 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+    .counter:before {
+        content: "";
+        background: #fff;
+        width: 30px;
+        height: 30px;
+        border-radius: 5px 0;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.07);
+        transform: translateX(-50%) rotate(45deg);
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+    }
+
+    .counter .counter-value {
+        color: #fff;
+        background: linear-gradient(to right, #19bbd2, #2778ee);
+        font-size: 38px;
+        font-weight: 300;
+        padding: 0 0 3px;
+        margin: 0 0 25px;
+        border-radius: 10px 10px 0 0;
+        display: block;
+    }
+
+    .counter h3 {
+        color: #2778ee;
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: 0.5px;
+        text-transform: capitalize;
+        margin: 0 0 25px;
+    }
+
+    .counter .counter-icon {
+        color: #fff;
+        background: linear-gradient(to right, #19bbd2, #2778ee);
+        font-size: 40px;
+        line-height: 60px;
+        width: 65px;
+        height: 65px;
+        margin: 0 auto;
+        border-radius: 10px;
+    }
+
+    .counter.purple .counter-value,
+    .counter.purple .counter-icon {
+        background: linear-gradient(to right, #8f70e7, #c452ef);
+    }
+
+    .counter.purple h3 {
+        color: #c452ef;
+    }
+
+    .counter.magenta .counter-value,
+    .counter.magenta .counter-icon {
+        background: linear-gradient(to right, #e84a94, #ae379b);
+    }
+
+    .counter.magenta h3 {
+        color: #ae379b;
+    }
+
+    .counter.yellow .counter-value,
+    .counter.yellow .counter-icon {
+        background: linear-gradient(to right, #fecb4b, #e69814);
+    }
+
+    .counter.yellow h3 {
+        color: #e69814;
+    }
+
+@media screen and (max-width:990px) {
+    .counter {
+        margin-bottom: 45px;
+    }
+}
